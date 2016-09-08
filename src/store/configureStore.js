@@ -1,9 +1,11 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import reducers from '../reducers'
+import thunk from 'redux-thunk'
 
-const configureStore = (onComplete) => {
-  const store = createStore(reducers)
-  return store
+const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
+
+const configureStore = () => {
+  return createStoreWithMiddleware(reducers)
 }
 
 export default configureStore
