@@ -19,7 +19,8 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: true,
-        authorizationToken: action.payload.authorizationToken
+        authorizationToken: action.payload.authorizationToken,
+        id: action.payload.id
       }
 
     case types.AUTH_USER_ERROR:

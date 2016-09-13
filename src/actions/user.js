@@ -1,12 +1,12 @@
 import * as types from './actionTypes'
 
-export function logInFacebook() {
+export const logInFacebook = () => {
   return {
     type: types.LOGIN_FACEBOOK
   }
 }
 
-export function logInFacebookSuccess(id, accessToken) {
+export const logInFacebookSuccess = (id, accessToken) => {
   return {
     type: types.LOGIN_FACEBOOK_SUCCESS,
     payload: {
@@ -18,13 +18,13 @@ export function logInFacebookSuccess(id, accessToken) {
   }
 }
 
-export function logInFacebookCancelled() {
+export const logInFacebookCancelled = () => {
   return {
     type: types.LOGIN_FACEBOOK_CANCELLED
   }
 }
 
-export function logInFacebookError(error) {
+export const logInFacebookError = (error) => {
   return {
     type: types.LOGIN_FACEBOOK_ERROR,
     payload: {
@@ -33,22 +33,23 @@ export function logInFacebookError(error) {
   }
 }
 
-export function authUser() {
+export const authUser = () => {
   return {
     type: types.AUTH_USER
   }
 }
 
-export function authUserSuccess(authorizationToken) {
+export const authUserSuccess = (user) => {
   return {
     type: types.AUTH_USER_SUCCESS,
     payload: {
-      authorizationToken
+      authorizationToken: user.authorizationToken,
+      id: user.id
     }
   }
 }
 
-export function authUserError(error) {
+export const authUserError = (error) => {
   return {
     type: types.AUTH_USER_ERROR,
     payload: {
