@@ -1,18 +1,18 @@
 import * as types from './actionTypes'
 
-export const postNewThing = () => {
+export const postThing = () => {
   return {
     type: types.POST_NEW_THING
   }
 }
 
-export const postNewThingSuccess = () => {
+export const postThingSuccess = () => {
   return {
     type: types.POST_NEW_THING_SUCCESS
   }
 }
 
-export const postNewThingError = (error) => {
+export const postThingError = (error) => {
   return {
     type: types.POST_NEW_THING_ERROR,
     payload: {
