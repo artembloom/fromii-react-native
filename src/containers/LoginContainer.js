@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { LoginManager, AccessToken } from 'react-native-fbsdk'
 import LoginView from '../components/LoginView'
-import userActions from '../actions/user'
+import * as userActions from '../actions/user'
 
 const URL = 'https://si5vl9foih.execute-api.us-east-1.amazonaws.com/dev'
 

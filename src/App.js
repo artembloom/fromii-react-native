@@ -1,13 +1,26 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-import { Text } from 'react-native'
+import Login from './containers/LoginContainer'
+import Profile from './containers/ProfileContainer'
 
 class App extends Component {
   render() {
-    return (
-      <Text>Hello, 0.0.1!</Text>
-    )
+    if (this.props.user.isLoggedIn) {
+      return (
+        <Profile />
+      )
+    }
+    else {
+      return <Login />
+    }
   }
 }
 
-export default App
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps)(App)
