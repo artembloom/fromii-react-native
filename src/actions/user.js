@@ -1,12 +1,15 @@
 import * as types from './actionTypes'
+import { LoginManager, AccessToken } from 'react-native-fbsdk'
 
-export const logInFacebook = () => {
+const URL = 'https://si5vl9foih.execute-api.us-east-1.amazonaws.com/dev'
+
+const logInFacebookRequest = () => {
   return {
-    type: types.LOGIN_FACEBOOK
+    type: types.LOGIN_FACEBOOK_REQUEST
   }
 }
 
-export const logInFacebookSuccess = (id, accessToken) => {
+const logInFacebookSuccess = (id, accessToken) => {
   return {
     type: types.LOGIN_FACEBOOK_SUCCESS,
     payload: {
@@ -18,13 +21,13 @@ export const logInFacebookSuccess = (id, accessToken) => {
   }
 }
 
-export const logInFacebookCancelled = () => {
+const logInFacebookCancelled = () => {
   return {
     type: types.LOGIN_FACEBOOK_CANCELLED
   }
 }
 
-export const logInFacebookError = (error) => {
+const logInFacebookError = (error) => {
   return {
     type: types.LOGIN_FACEBOOK_ERROR,
     payload: {
@@ -33,13 +36,13 @@ export const logInFacebookError = (error) => {
   }
 }
 
-export const authUser = () => {
+const authUserRequest = () => {
   return {
-    type: types.AUTH_USER
+    type: types.AUTH_USER_REQUEST
   }
 }
 
-export const authUserSuccess = (user) => {
+const authUserSuccess = (user) => {
   return {
     type: types.AUTH_USER_SUCCESS,
     payload: {
@@ -49,11 +52,46 @@ export const authUserSuccess = (user) => {
   }
 }
 
-export const authUserError = (error) => {
+const authUserError = (error) => {
   return {
     type: types.AUTH_USER_ERROR,
     payload: {
       error
     }
+  }
+}
+
+export const logIn = () => {
+  return (dispatch, getState) => {
+    return LoginManager.logInWithReadPermissions(['public_profile', 'user_friends', 'email'])
+      .then((result) => {
+        if (result.isCancelled) {
+          dispatch(logInFacebookCancelled())
+        } else {
+          return AccessToken.getCurrentAccessToken()
+            .then((data) => {
+              dispatch(logInFacebookSuccess(data.userID, data.accessToken))
+              dispatch(authUser())
+              return fetch(`${URL}/auth`, {
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  provider: 'facebook',
+                  id: data.userID,
+                  accessToken: data.accessToken,
+                  email: data.email
+                })
+              })
+              .then((response) => response.json())
+              .then((responseJson) => dispatch(authUserSuccess(responseJson)))
+              .catch((error) => dispatch(authUserError(error)))
+            })
+        }
+      },
+      (error) => dispatch(logInFacebookError(error))
+    )
   }
 }

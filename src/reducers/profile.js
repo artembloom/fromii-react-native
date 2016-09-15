@@ -10,7 +10,7 @@ const profile = (state = initialState, action) => {
       return action.payload.profile
 
     case types.FETCH_USER_PROFILE_ERROR:
-    case types.FETCH_USER_PROFILE:
+    case types.FETCH_USER_PROFILE_REQUEST:
     default:
       return state
 
