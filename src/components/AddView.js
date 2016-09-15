@@ -10,11 +10,7 @@ import {
 
 class AddView extends Component {
   constructor(props) {
-    super(props);
-    this.state = {
-      title: '',
-      description: ''
-    }
+    super(props)
   }
 
   render() {
@@ -22,31 +18,31 @@ class AddView extends Component {
       <View style={styles.container}>
         <Text style={styles.caption}>TITLE</Text>
         <View style={styles.titleContainer}>
-        <TextInput
-          style={styles.titleInput}
-          maxLength={50}
-          onChangeText={(title) => this.setState({title})}
-          value={this.state.title}
-          selectionColor={theme.COLOR_PRIMARY}
-          placeholder={'required'}
-          placeholderTextColor={theme.COLOR_LINES}
-          returnKeyType={'done'}
-        />
-      </View>
-      <Text style={styles.caption}>DESCRIPTION</Text>
-      <View style={styles.titleContainer}>
-      <TextInput
-        style={styles.descriptionInput}
-        maxLength={500}
-        onChangeText={(description) => this.setState({description})}
-        value={this.state.description}
-        selectionColor={theme.COLOR_PRIMARY}
-        placeholder={'optional'}
-        placeholderTextColor={theme.COLOR_LINES}
-        multiline={true}
-        returnKeyType={'done'}
-      />
-    </View>
+          <TextInput
+            style={styles.titleInput}
+            maxLength={50}
+            onChangeText={(title) => this.props.changeTitle(title)}
+            value={this.props.add.title}
+            selectionColor={theme.COLOR_PRIMARY}
+            placeholder={'required'}
+            placeholderTextColor={theme.COLOR_LINES}
+            returnKeyType={'done'}
+          />
+        </View>
+        <Text style={styles.caption}>DESCRIPTION</Text>
+        <View style={styles.titleContainer}>
+          <TextInput
+            style={styles.descriptionInput}
+            maxLength={500}
+            onChangeText={(description) => this.props.changeDescription(description)}
+            value={this.props.add.description}
+            selectionColor={theme.COLOR_PRIMARY}
+            placeholder={'optional'}
+            placeholderTextColor={theme.COLOR_LINES}
+            multiline={true}
+            returnKeyType={'done'}
+          />
+        </View>
       </View>
     )
   }
