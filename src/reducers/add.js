@@ -1,8 +1,11 @@
 import * as types from '../actions/actionTypes'
 
-const initialState = null
+const initialState = {
+  title: '',
+  description: ''
+}
 
-const add = (state = initialState, action) {
+const add = (state = initialState, action) => {
 
   switch (action.type) {
     case types.CHANGE_TITLE:
