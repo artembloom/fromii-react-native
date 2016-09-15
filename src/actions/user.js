@@ -63,6 +63,7 @@ const authUserError = (error) => {
 
 export const logIn = () => {
   return (dispatch, getState) => {
+    dispatch(logInFacebookRequest())
     return LoginManager.logInWithReadPermissions(['public_profile', 'user_friends', 'email'])
       .then((result) => {
         if (result.isCancelled) {
@@ -71,7 +72,7 @@ export const logIn = () => {
           return AccessToken.getCurrentAccessToken()
             .then((data) => {
               dispatch(logInFacebookSuccess(data.userID, data.accessToken))
-              dispatch(authUser())
+              dispatch(authUserRequest())
               return fetch(`${URL}/auth`, {
                 method: 'POST',
                 headers: {
