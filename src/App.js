@@ -1,19 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Login from './containers/LoginContainer'
-import Profile from './containers/ProfileContainer'
+import Add from './containers/AddContainer'
 
 class App extends Component {
   render() {
-    if (this.props.user.isLoggedIn) {
-      return (
-        <Profile />
-      )
-    }
-    else {
-      return <Login />
-    }
+    return (
+        <Add />
+    )
   }
 }
 
