@@ -11,8 +11,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     postThing: () => dispatch(postThing()),
-    onChangeTitle: (title) => dispatch(changeTitle(title)),
-    onChangeDescription: (description) => dispatch(changeDescription(description))
+    changeTitle: (title) => dispatch(changeTitle(title)),
+    changeDescription: (description) => dispatch(changeDescription(description))
   }
 }
 
