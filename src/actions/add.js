@@ -1,18 +1,20 @@
 import * as types from './actionTypes'
 
-export const postNewThingRequest = () => {
+const URL = 'https://si5vl9foih.execute-api.us-east-1.amazonaws.com/dev'
+
+const postThingRequest = () => {
   return {
     type: types.POST_NEW_THING_REQUEST
   }
 }
 
-export const postNewThingSuccess = () => {
+const postThingSuccess = () => {
   return {
     type: types.POST_NEW_THING_SUCCESS
   }
 }
 
-export const postNewThingError = (error) => {
+const postThingError = (error) => {
   return {
     type: types.POST_NEW_THING_ERROR,
     payload: {
@@ -36,5 +38,24 @@ export const changeDescription = (description) => {
     payload: {
       description
     }
+  }
+}
+
+export const postThing = () => {
+  return (dispatch, getState) => {
+    const state = getState()
+    dispatch(postThingRequest())
+    return fetch(`${URL}/things`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${state.user.authorizationToken}`
+      },
+      body: JSON.stringify(state.add)
+    })
+    .then((response) => response.json())
+    .then((responseJson) => dispatch(postThingSuccess(responseJson)))
+    .catch((error) => dispatch(postThingError(error)))
   }
 }

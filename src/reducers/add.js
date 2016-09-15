@@ -1,6 +1,9 @@
 import * as types from '../actions/actionTypes'
 
-const initialState = null
+const initialState = {
+  title: '',
+  description: ''
+}
 
 const add = (state = initialState, action) => {
 
