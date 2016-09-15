@@ -1,8 +1,8 @@
 import * as types from './actionTypes'
 
-export const postThing = () => {
+export const postThingRequest = () => {
   return {
-    type: types.POST_NEW_THING
+    type: types.POST_NEW_THING_REQUEST
   }
 }
 
