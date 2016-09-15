@@ -43,19 +43,19 @@ export const changeDescription = (description) => {
 
 export const postThing = () => {
   return (dispatch, getState) => {
-    const { add } = getState()
-    dispatch(addActions.postThing())
+    const state = getState()
+    dispatch(postThingRequest())
     return fetch(`${URL}/things`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${user.authorizationToken}`
+        'Authorization': `Bearer ${state.user.authorizationToken}`
       },
-      body: JSON.stringify(add)
+      body: JSON.stringify(state.add)
     })
     .then((response) => response.json())
-    .then((responseJson) => dispatch(addActions.postThingSuccess(responseJson)))
-    .catch((error) => dispatch(addActions.postThingError(error)))
+    .then((responseJson) => dispatch(postThingSuccess(responseJson)))
+    .catch((error) => dispatch(postThingError(error)))
   }
 }
