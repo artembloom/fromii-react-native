@@ -4,8 +4,6 @@ import { connect } from 'react-redux'
 import Login from './containers/LoginContainer'
 import Profile from './containers/ProfileContainer'
 
-//import AddView from './components/AddView'
-
 class App extends Component {
   render() {
     if (this.props.user.isLoggedIn) {
