@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import ProfileView from '../components/ProfileView'
-import { fetchUserProfile } from '../actions/profile'
+import { getUserProfile } from '../actions/profile'
 
 const mapStateToProps = (state) => {
   return {
@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchUserProfile: () => dispatch(fetchUserProfile())
+    getUserProfile: () => dispatch(getUserProfile())
   }
 }
 

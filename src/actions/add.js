@@ -4,19 +4,19 @@ const URL = 'https://si5vl9foih.execute-api.us-east-1.amazonaws.com/dev'
 
 const postThingRequest = () => {
   return {
-    type: types.POST_NEW_THING_REQUEST
+    type: types.POST_THING_REQUEST
   }
 }
 
 const postThingSuccess = () => {
   return {
-    type: types.POST_NEW_THING_SUCCESS
+    type: types.POST_THING_SUCCESS
   }
 }
 
 const postThingError = (error) => {
   return {
-    type: types.POST_NEW_THING_ERROR,
+    type: types.POST_THING_ERROR,
     payload: {
       error
     }
@@ -43,7 +43,9 @@ export const changeDescription = (description) => {
 
 export const postThing = () => {
   return (dispatch, getState) => {
+    console.log(getState().user);
     const state = getState()
+
     dispatch(postThingRequest())
     return fetch(`${URL}/things`, {
       method: 'POST',
@@ -55,7 +57,10 @@ export const postThing = () => {
       body: JSON.stringify(state.add)
     })
     .then((response) => response.json())
-    .then((responseJson) => dispatch(postThingSuccess(responseJson)))
+    .then((responseJson) => {
+      console.log(responseJson);
+      dispatch(postThingSuccess(responseJson))
+    })
     .catch((error) => dispatch(postThingError(error)))
   }
 }

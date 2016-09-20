@@ -2,34 +2,34 @@ import * as types from './actionTypes'
 
 const URL = 'https://si5vl9foih.execute-api.us-east-1.amazonaws.com/dev'
 
-const fetchUserProfileRequest = () => {
+const getUserProfileRequest = () => {
   return {
-    type: types.FETCH_USER_PROFILE_REQUEST
+    type: types.GET_USER_PROFILE_REQUEST
   }
 }
 
-const fetchUserProfileSuccess = (profile) => {
+const getUserProfileSuccess = (profile) => {
   return {
-    type: types.FETCH_USER_PROFILE_SUCCESS,
+    type: types.GET_USER_PROFILE_SUCCESS,
     payload: {
       profile
     }
   }
 }
 
-const fetchUserProfileError = (error) => {
+const getUserProfileError = (error) => {
   return {
-    type: types.FETCH_USER_PROFILE_ERROR,
+    type: types.GET_USER_PROFILE_ERROR,
     payload: {
       error
     }
   }
 }
 
-export const fetchUserProfile = () => {
+export const getUserProfile = () => {
   return (dispatch, getState) => {
     const { user } = getState()
-    dispatch(fetchUserProfileRequest())
+    dispatch(getUserProfileRequest())
     return fetch(`${URL}/users/${user.id}`, {
       method: 'GET',
       headers: {
@@ -39,7 +39,7 @@ export const fetchUserProfile = () => {
       }
     })
     .then((response) => response.json())
-    .then((responseJson) => dispatch(fetchUserProfileSuccess(responseJson)))
-    .catch((error) => dispatch(fetchUserProfileError(error)))
+    .then((responseJson) => dispatch(getUserProfileSuccess(responseJson)))
+    .catch((error) => dispatch(getUserProfileError(error)))
   }
 }
