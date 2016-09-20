@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import * as theme from './theme'
 import LoadingView from './LoadingView'
-
 import {
   Text,
   View,
@@ -10,16 +9,13 @@ import {
 
 class ProfileView extends Component {
 
-  constructor(props) {
-    super(props)
-  }
-
   componentDidMount() {
-    this.props.fetchUserProfile()
+    if (!this.props.profile) {
+      this.props.getUserProfile()
+    }
   }
 
   render() {
-    console.log(this.props.profile);
     if (this.props.profile) {
       return (
         <View style={styles.container}>
@@ -35,9 +31,7 @@ class ProfileView extends Component {
         </View>
       )
     }
-    else {
-      return <LoadingView />
-    }
+    else return <LoadingView />
   }
 }
 
