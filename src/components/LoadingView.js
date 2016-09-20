@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-
 import * as theme from './theme'
-
 import {
   ActivityIndicator,
   View
