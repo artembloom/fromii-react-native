@@ -16,3 +16,8 @@ export const POST_THING_SUCCESS = 'POST_THING_SUCCESS'
 export const POST_THING_ERROR = 'POST_THING_ERROR'
 export const CHANGE_TITLE = 'CHANGE_TITLE'
 export const CHANGE_DESCRIPTION = 'CHANGE_DESCRIPTION'
+
+export const NAV_PUSH = 'NAV_PUSH'
+export const NAV_POP = 'NAV_POP'
+export const SELECT_TAB = 'SELECT_TAB'
+export const JUMP_TO_ROUTE = 'JUMP_TO_ROUTE'
