@@ -8,6 +8,7 @@ const initialState = {
 const add = (state = initialState, action) => {
 
   switch (action.type) {
+    
     case types.CHANGE_TITLE:
       return {
         ...state,
@@ -20,7 +21,7 @@ const add = (state = initialState, action) => {
         description: action.payload.description
       }
 
-    case types.POST_NEW_THING_SUCCESS:
+    case types.POST_THING_SUCCESS:
       return initialState
 
     default:

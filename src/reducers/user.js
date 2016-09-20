@@ -1,7 +1,7 @@
 import * as types from '../actions/actionTypes'
 
 const initialState = {
-  isLoggedIn:  false
+  isLoggedIn: false
 }
 
 const user = (state = initialState, action) => {
@@ -30,7 +30,6 @@ const user = (state = initialState, action) => {
 
     default:
       return state
-
   }
 }
 
