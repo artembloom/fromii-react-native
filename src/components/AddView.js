@@ -1,21 +1,36 @@
 import React, { Component } from 'react'
-
 import * as theme from './theme'
-
 import {
   View,
   Text,
-  TextInput
+  TextInput,
+  TouchableOpacity,
+  StatusBar
 } from 'react-native'
 
 class AddView extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     return (
       <View style={styles.container}>
+        <View style={styles.header}>
+          <View style={styles.navBar}>
+            <TouchableOpacity style={styles.headerLeft} onPress={() => this.props.jumpToRoute('tabs')}>
+              <Text style={{fontSize: 18, color: theme.COLOR_PRIMARY}}>Cancel</Text>
+            </TouchableOpacity>
+            <View style={styles.headerTitle}>
+              <Text style={{fontSize: 18, color: theme.COLOR_TEXT, fontWeight: '500'}}>New Thing</Text>
+            </View>
+            <TouchableOpacity
+                style={styles.headerRight}
+                onPress={() => {
+                  this.props.postThing()
+                  this.props.jumpToRoute('tabs')
+                }}
+                disabled={this.props.add.title === ''}>
+              <Text style={{fontSize: 18, color: this.props.add.title === '' ? theme.COLOR_LINES : theme.COLOR_PRIMARY, fontWeight: '500'}}>Save</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
         <Text style={styles.caption}>TITLE</Text>
         <View style={styles.titleContainer}>
           <TextInput
@@ -51,31 +66,54 @@ class AddView extends Component {
 const styles = {
   container: {
     flex: 1,
-    marginTop: 64,
+    backgroundColor: theme.COLOR_INVERSE
+  },
+  header: {
+    flex: 0,
+    height: 44,
     backgroundColor: theme.COLOR_INVERSE,
-    borderTopWidth: 1,
-    borderTopColor: theme.COLOR_TEXT
+    borderBottomColor: theme.COLOR_BORDERS,
+    borderBottomWidth: 1,
+  },
+  navBar: {
+    flex: 1,
+    flexDirection: 'row'
+  },
+  headerLeft: {
+    flex: 1,
+    paddingLeft: 12,
+    justifyContent: 'center',
+    alignItems: 'flex-start'
+  },
+  headerTitle: {
+    flex: 3,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  headerRight: {
+    flex: 1,
+    paddingRight: 12,
+    justifyContent: 'center',
+    alignItems: 'flex-end'
   },
   titleInput: {
     flex: 1,
-    fontSize: 20,
+    fontSize: 24,
     color: theme.COLOR_TEXT,
-    minHeight: 40,
+    minHeight: 48,
     backgroundColor: theme.COLOR_INVERSE,
-    paddingVertical: 8,
-    fontWeight: '400'
+    paddingVertical: 8
   },
   descriptionInput: {
     flex: 1,
-    fontSize: 20,
+    fontSize: 24,
     color: theme.COLOR_TEXT,
-    height: 120,
+    height: 72,
     backgroundColor: theme.COLOR_INVERSE,
-    paddingVertical: 8,
-    fontWeight: '200'
+    paddingVertical: 8
   },
   caption: {
-    fontSize: 16,
+    fontSize: 18,
     marginTop: 16,
     marginHorizontal: 16,
     color: theme.COLOR_SUBTEXT
