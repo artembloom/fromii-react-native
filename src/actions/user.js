@@ -64,7 +64,7 @@ const authUserError = (error) => {
 export const logIn = () => {
   return (dispatch, getState) => {
     dispatch(logInFacebookRequest())
-    return LoginManager.logInWithReadPermissions(['public_profile', 'user_friends', 'email'])
+    return LoginManager.logInWithReadPermissions(['public_profile', 'user_friends'])
       .then((result) => {
         if (result.isCancelled) {
           dispatch(logInFacebookCancelled())
