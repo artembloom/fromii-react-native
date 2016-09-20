@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import * as theme from '../theme'
 import LoadingView from '../LoadingView'
+import * as theme from '../theme'
 import {
   View,
   TouchableOpacity,
@@ -9,13 +9,7 @@ import {
 } from 'react-native'
 
 class LoginView extends Component {
-
-  constructor(props) {
-    super(props)
-  }
-
   render() {
-    console.log(this.props.user);
     if (!this.props.user.facebook) {
       return (
         <View style={styles.container}>
@@ -33,11 +27,8 @@ class LoginView extends Component {
         </View>
       )
     }
-    else {
-      return <LoadingView />
-    }
+    else return <LoadingView />
   }
-
 }
 
 const styles = {
