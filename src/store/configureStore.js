@@ -4,8 +4,6 @@ import thunk from 'redux-thunk'
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
 
-const configureStore = () => {
-  return createStoreWithMiddleware(reducers)
-}
+const configureStore = () => createStoreWithMiddleware(reducers)
 
 export default configureStore
