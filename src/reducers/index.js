@@ -1,12 +1,11 @@
 import { combineReducers } from 'redux'
-import user from './user'
-import profile from './profile'
-import add from './add'
-import navigation from './navigation'
-import things from './things'
+
+import navigation from '../components/Navigation/reducer'
+import user from '../components/User/reducer'
+import profile from '../components/Profile/reducer'
+import add from '../components/Add/reducer'
 
 const reducers = combineReducers({
-  things,
   navigation,
   user,
   profile,

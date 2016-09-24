@@ -1,18 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import LoadingView from './components/LoadingView'
-import Login from './containers/LoginContainer'
-import RootNavigator from './containers/RootNavigatorContainer'
+import AddNavigator from './components/Navigation/AddNavigator'
+import RootNavigator from './components/Navigation/RootNavigator'
+import LoadingView from './components/Common/LoadingView'
+import User from './components/User'
 
 class App extends Component {
   render() {
-    if (this.props.user.isLoggedIn) {
-      return <RootNavigator />
-    }
-    else if (this.props.user.facebook) {
-      return <LoadingView />
-    }
-    else return <Login />
+    console.log(this.props.user);
+    if (!this.props.user.isLoggedIn) {
+      return <User />
+    } else return <RootNavigator />
   }
 }
 
